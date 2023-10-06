@@ -1,0 +1,1788 @@
+{
+    "fetch": {
+        "url": "https://cad.onshape.com/api/v5/openapi?includeDeprecated=false&onlyDeprecated=false",
+        "versionAlias": null,
+        "userRole": "PUBLIC",
+        "operationIds": null
+    },
+    "generate": {
+        "generatorUrl": "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/6.0.0/openapi-generator-cli-6.0.0.jar",
+        "customGeneratorUrl": "https://github.com/onshape-public/openapi-utilities/raw/main/go-oapi-codegen/release/go-oapi-codegen-latest.jar",
+        "preprocess": [
+            {
+                "key": "paths['/appelements/d/{did}/w/{wid}/e/{eid}/blob/{bid}'].post.requestBody.content['multipart/form-data'].schema.properties.file.type",
+                "type": "update",
+                "value": "string"
+            },
+            {
+                "key": "components.schemas['BTMetadataPropertyInfo'].properties.value",
+                "type": "update",
+                "value": {}
+            },
+            {
+                "key": "components.schemas['BTMetadataPropertyInfo'].properties.defaultValue",
+                "type": "update",
+                "value": {}
+            },
+            {
+                "key": "components.schemas['BTJEditInsert-2523'].allOf[1].properties.value.additionalProperties",
+                "type": "update",
+                "value": true
+            },
+            {
+                "key": "components.schemas['BTGetJsonResponse-2137'].properties.tree.additionalProperties",
+                "type": "update",
+                "value": true
+            },
+            {
+                "key": "components.schemas['BTJEditChange-2636'].allOf[1].properties.value.additionalProperties",
+                "type": "update",
+                "value": true
+            },
+            {
+                "key": "components.schemas['BTEventParams']",
+                "type": "update",
+                "value": {
+                    "type": "object",
+                    "discriminator": {
+                        "propertyName": "jsonType",
+                        "mapping": {
+                            "DocumentOpenEventInfo": "#/components/schemas/BTDocumentOpenEventParams"
+                        }
+                    },
+                    "properties": {
+                        "jsonType": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTDocumentOpenEventParams']",
+                "type": "update",
+                "value": {
+                    "type": "object",
+                    "allOf": [
+                        {
+                            "$ref": "#/components/schemas/BTEventParams"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "documentId": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "key": "paths['/events']",
+                "type": "update",
+                "value": {
+                    "post": {
+                        "tags": [
+                            "Event"
+                        ],
+                        "summary": "Fire an asynchronous event.",
+                        "operationId": "fireEvent",
+                        "requestBody": {
+                            "content": {
+                                "application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/BTEventParams"
+                                    }
+                                }
+                            }
+                        },
+                        "responses": {
+                            "default": {
+                                "description": "default response",
+                                "content": {
+                                    "application/vnd.onshape.v2+json;charset=UTF-8;qs=0.2": {
+                                        "schema": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "deprecated": false,
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "key": "tags[this.tags.length]",
+                "type": "update",
+                "value": {
+                    "name": "GlobalTreeNodes",
+                    "description": "Global Tree Node Operations"
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/folder/{fid}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "deprecated": false,
+                        "operationId": "globalTreeNodesFolder",
+                        "parameters": [
+                            {
+                                "description": "ID of the folder to traverse.",
+                                "explode": false,
+                                "in": "path",
+                                "name": "fid",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            },
+                            {
+                                "description": "When true, requests that the path of all nodes up to the root are to be returned.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "getPathToRoot",
+                                "required": false,
+                                "schema": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Starting offset in the sorted list of items to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "offset",
+                                "required": false,
+                                "schema": {
+                                    "default": 0,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Maximum number of items in the list to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "limit",
+                                "required": false,
+                                "schema": {
+                                    "default": 20,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Field to sort the items in the list by.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortColumn",
+                                "required": false,
+                                "schema": {
+                                    "default": "modifiedAt",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Which way to sort the list (asc/desc).  Defaults to asc.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortOrder",
+                                "required": false,
+                                "schema": {
+                                    "default": "asc",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "summary": "Get Tree Node List",
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/team/{teamId}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "summary": "Retrieve List of folders by Team id.",
+                        "operationId": "globalTreeNodesTeam",
+                        "parameters": [
+                            {
+                                "description": "ID of team to get data for",
+                                "name": "teamId",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "description": "When true, requests that the path of all nodes up to the root are to be returned.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "getPathToRoot",
+                                "required": false,
+                                "schema": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Starting offset in the sorted list of items to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "offset",
+                                "required": false,
+                                "schema": {
+                                    "default": 0,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Maximum number of items in the list to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "limit",
+                                "required": false,
+                                "schema": {
+                                    "default": 20,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Field to sort the items in the list by.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortColumn",
+                                "required": false,
+                                "schema": {
+                                    "default": "modifiedAt",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Which way to sort the list (asc/desc).  Defaults to asc.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortOrder",
+                                "required": false,
+                                "schema": {
+                                    "default": "asc",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "deprecated": false,
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/insertable/team/{teamId}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "summary": "Retrieve insertables by Team id.",
+                        "operationId": "globalTreeNodesTeamInsertables",
+                        "parameters": [
+                            {
+                                "description": "ID of team to get data for",
+                                "name": "teamId",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "includeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSurfaces",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSketches",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeReferenceFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeAssemblies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatureStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeBlobs",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includePartStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeWires",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFlattenedBodies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeApplications",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedApplicationMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includeFSTables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFSComputedPartPropertyFunctions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariableStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobExtensions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "excludeNewerFSVersions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "maxFeatureScriptVersion",
+                                "in": "query",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeMeshes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeCompositeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "When true, requests that the path of all nodes up to the root are to be returned.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "getPathToRoot",
+                                "required": false,
+                                "schema": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Starting offset in the sorted list of items to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "offset",
+                                "required": false,
+                                "schema": {
+                                    "default": 0,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Maximum number of items in the list to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "limit",
+                                "required": false,
+                                "schema": {
+                                    "default": 20,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Field to sort the items in the list by.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortColumn",
+                                "required": false,
+                                "schema": {
+                                    "default": "modifiedAt",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Which way to sort the list (asc/desc).  Defaults to asc.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortOrder",
+                                "required": false,
+                                "schema": {
+                                    "default": "asc",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "deprecated": false,
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/insertable/folder/{fid}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "summary": "Retrieve insertables by folder id.",
+                        "operationId": "globalTreeNodesFolderInsertables",
+                        "parameters": [
+                            {
+                                "name": "fid",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "includeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSurfaces",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSketches",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeReferenceFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeAssemblies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatureStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeBlobs",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includePartStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeWires",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFlattenedBodies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeApplications",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedApplicationMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includeFSTables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFSComputedPartPropertyFunctions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariableStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobExtensions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "excludeNewerFSVersions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "maxFeatureScriptVersion",
+                                "in": "query",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeMeshes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeCompositeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "When true, requests that the path of all nodes up to the root are to be returned.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "getPathToRoot",
+                                "required": false,
+                                "schema": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Starting offset in the sorted list of items to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "offset",
+                                "required": false,
+                                "schema": {
+                                    "default": 0,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Maximum number of items in the list to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "limit",
+                                "required": false,
+                                "schema": {
+                                    "default": 20,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Field to sort the items in the list by.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortColumn",
+                                "required": false,
+                                "schema": {
+                                    "default": "modifiedAt",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Which way to sort the list (asc/desc).  Defaults to asc.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortOrder",
+                                "required": false,
+                                "schema": {
+                                    "default": "asc",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "deprecated": false,
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/thumbnails/document/{did}'].get.deprecated",
+                "type": "update",
+                "value": true
+            },
+            {
+                "key": "paths['/thumbnails/document/{did}/version/{vid}'].get.deprecated",
+                "type": "update",
+                "value": true
+            },
+            {
+                "key": "paths['/thumbnails/d/{did}/s/{sz}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "tags": [
+                            "Thumbnail"
+                        ],
+                        "summary": "Retrieve default thumbnail information for a document, with a specified size in pixels by document ID.",
+                        "operationId": "getDocumentDefaultThumbnailWithSize",
+                        "parameters": [
+                            {
+                                "name": "did",
+                                "in": "path",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "sz",
+                                "in": "path",
+                                "description": "the generated thumbnail size in pixels, widthxheigth",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "300x300"
+                            },
+                            {
+                                "name": "t",
+                                "in": "query",
+                                "description": "Cache Control key. If specified, the response header returned will tell the client to use cached thumbnails.",
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            {
+                                "name": "skipDefaultImage",
+                                "in": "query",
+                                "description": "Controls the return of the default image, if thumbnail is not available",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                },
+                                "examples": {
+                                    "By default return the default thumbnail, if the thumbnail is not found or generated": {
+                                        "summary": "Get the default image, if the thumbnail is not found",
+                                        "description": "By default return the default thumbnail, if the thumbnail is not found or generated"
+                                    },
+                                    "Setting skipDefaultImage=true, returns a 404 if the thumbnail is not found": {
+                                        "summary": "Skip the default image, if the thumbnail does not exist.",
+                                        "description": "Setting skipDefaultImage=true, returns a 404 if the thumbnail is not found",
+                                        "value": true
+                                    }
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "description": "default response",
+                                "content": {
+                                    "image/*": {
+                                        "schema": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "deprecated": false,
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/magic/{mid}']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "deprecated": false,
+                        "description": "Returns a list of all the elements in one of several globally defined lists. Known values include:\n| MAGIC ID | TITLE | USAGE |\n|-|-|-|\n| 0 | Recently Opened | Most recently opened documents |\n| 1 | My Onshape | Root folder and contents |\n| 2 | Created by Me | Documents created by the logged in user |\n| 3 | Public | All public documents (a very long list) |\n| 4 | Trash | Trashcan for the logged in user |\n| 5 | Tutorials & Samples | Desktop Tutorials |\n| 6 | FeatureScript samples |  FeatureScript samples (found when you select Other documents while adding a custom feature) |\n| 7 | Community spotlight | Community spotlight (found when you select Other documents while adding a custom feature) |\n| 8 | Tutorials | IOS Tutorials |\n| 9 | Tutorials | Android Tutorials |\n| 10 | Labels | Labels created by the user  |\n| 11 | Teams | Teams that the user is connected to |\n| 12 | Shared with me | Documents shared with the user |\n| 13 | Cloud Storage | Visual list of cloud accounts associated with the logged in user |\n| 14 | Custom table samples | Custom table samples (found when you select Other documents while adding a custom table) |\n",
+                        "operationId": "globalTreeNodesMagic",
+                        "parameters": [
+                            {
+                                "description": "Magic ID of list to return.",
+                                "explode": false,
+                                "in": "path",
+                                "name": "mid",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "style": "simple"
+                            },
+                            {
+                                "description": "When true, requests that the path of all nodes up to the root are to be returned.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "getPathToRoot",
+                                "required": false,
+                                "schema": {
+                                    "default": false,
+                                    "type": "boolean"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Starting offset in the sorted list of items to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "offset",
+                                "required": false,
+                                "schema": {
+                                    "default": 0,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Maximum number of items in the list to return.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "limit",
+                                "required": false,
+                                "schema": {
+                                    "default": 20,
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Field to sort the items in the list by.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortColumn",
+                                "required": false,
+                                "schema": {
+                                    "default": "modifiedAt",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "description": "Which way to sort the list (asc/desc).  Defaults to asc.",
+                                "explode": true,
+                                "in": "query",
+                                "name": "sortOrder",
+                                "required": false,
+                                "schema": {
+                                    "default": "asc",
+                                    "type": "string"
+                                },
+                                "style": "form"
+                            },
+                            {
+                                "name": "includeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSurfaces",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeSketches",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeReferenceFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeAssemblies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatureStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeBlobs",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includePartStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFeatures",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeWires",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFlattenedBodies",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeApplications",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedApplicationMimeTypes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "name": "includeFSTables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeFSComputedPartPropertyFunctions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariables",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "includeVariableStudios",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "name": "allowedBlobExtensions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "string",
+                                    "default": ""
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "excludeNewerFSVersions",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "maxFeatureScriptVersion",
+                                "in": "query",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeMeshes",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            },
+                            {
+                                "description": "Is this actually supported?",
+                                "name": "includeCompositeParts",
+                                "in": "query",
+                                "schema": {
+                                    "type": "boolean",
+                                    "default": false
+                                }
+                            }
+                        ],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "summary": "Get Tree Node List",
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "paths['/globaltreenodes/']",
+                "type": "update",
+                "value": {
+                    "get": {
+                        "deprecated": false,
+                        "operationId": "globalTreeNodes",
+                        "parameters": [],
+                        "responses": {
+                            "default": {
+                                "content": {
+                                    "application/json;charset=UTF-8; qs=0.09": {
+                                        "schema": {
+                                            "$ref": "#/components/schemas/BTGlobalTreeNodesInfo"
+                                        }
+                                    }
+                                },
+                                "description": "default response"
+                            }
+                        },
+                        "summary": "Get Searchable Trees",
+                        "tags": [
+                            "GlobalTreeNodes"
+                        ],
+                        "security": [
+                            {
+                                "OAuth2": [
+                                    "OAuth2Read"
+                                ],
+                                "BasicAuth": [
+                                    "OAuth2Read"
+                                ]
+                            }
+                        ],
+                        "x-BTVisibility": "PRODUCTION"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTGlobalTreeNodesInfo']",
+                "type": "update",
+                "value": {
+                    "type": "object",
+                    "properties": {
+                        "permissionSet": {
+                            "items": {
+                                "title": "Permission Name",
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "pathToRoot": {
+                            "items": {
+                                "$ref": "#/components/schemas/BTGlobalTreeNodeInfo"
+                            },
+                            "type": "array"
+                        },
+                        "next": {
+                            "type": "string"
+                        },
+                        "href": {
+                            "format": "uri",
+                            "type": "string"
+                        },
+                        "items": {
+                            "items": {
+                                "$ref": "#/components/schemas/BTGlobalTreeMagicNodeInfo"
+                            },
+                            "type": "array"
+                        }
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTGlobalTreeNodeListResponse'].properties.items",
+                "type": "update",
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/BTGlobalTreeNodeInfo"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTGlobalTreeNodeListResponseBTTeamInfo'].properties.items",
+                "type": "update",
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/BTTeamInfo"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTGlobalTreeMagicNodeInfo'].allOf[1]",
+                "type": "update",
+                "value": {
+                    "type": "object",
+                    "properties": {
+                        "subType": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "thumbnail": {
+                            "$ref": "#/components/schemas/BTThumbnailInfo"
+                        }
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTDocumentSummaryInfo'].properties.jsonType",
+                "type": "update",
+                "value": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "components.schemas['BTDocumentSummaryInfo'].required",
+                "type": "update",
+                "value": [
+                    "jsonType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTDocumentInfo'].properties.jsonType",
+                "type": "update",
+                "value": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "components.schemas['BTDocumentInfo'].required",
+                "type": "update",
+                "value": [
+                    "jsonType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTDocumentLabelInfo'].properties.jsonType",
+                "type": "update",
+                "value": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "components.schemas['BTDocumentLabelInfo'].required",
+                "type": "update",
+                "value": [
+                    "jsonType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTProjectInfo'].properties.jsonType",
+                "type": "update",
+                "value": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "components.schemas['BTProjectInfo'].required",
+                "type": "update",
+                "value": [
+                    "jsonType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTTeamSummaryInfo'].properties.jsonType",
+                "type": "update",
+                "value": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "components.schemas['BTTeamSummaryInfo'].required",
+                "type": "update",
+                "value": [
+                    "jsonType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValue-1888'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEdit-3734'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEdit-3734'].properties",
+                "type": "update",
+                "value": {
+                    "btType": {
+                        "type": "string"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTFSValueArray-1499'].properties",
+                "type": "update",
+                "value": {
+                    "btType": {
+                        "type": "string"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTFSValueArray-1499'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityCondition-177'].properties",
+                "type": "update",
+                "value": {
+                    "btType": {
+                        "type": "string"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityCondition-177'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueBoolean-1195'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueNumber-772'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueOther-1124'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueString-1422'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueTooBig-1247'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueUndefined-2003'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueWithUnits-1817'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueMap-2062'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTFSValueMap-2062'].properties",
+                "type": "update",
+                "value": {
+                    "btType": {
+                        "type": "string"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityCondition-177'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityCondition-177'].properties",
+                "type": "update",
+                "value": {
+                    "btType": {
+                        "type": "string"
+                    }
+                }
+            },
+            {
+                "key": "components.schemas['BTJEditChange-2636'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEditDelete-1992'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEditInsert-2523'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEditList-2707'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTJEditMove-3245'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityAlwaysHidden-176'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityLogical-178'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityOnEqual-180'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityOnMateDOFType-2114'].required",
+                "type": "update",
+                "value": [
+                    "btType"
+                ]
+            },
+            {
+                "key": "components.schemas['BTParameterVisibilityOnMateDOFType-2114'].discriminator",
+                "type": "remove"
+            },
+            {
+                "key": "components.schemas['BTInnerArrayParameterLocation-2368'].discriminator",
+                "type": "remove"
+            },
+            {
+                "key": "components.schemas['BTMSketchCurveSegment-155'].discriminator",
+                "type": "remove"
+            },
+            {
+                "key": "paths['/assemblies/d/{did}/w/{wid}/e/{eid}/instances'].post.responses['200'].content",
+                "type": "remove"
+            },
+            {
+                "key": "paths['/blobelements/d/{did}/w/{wid}'].post.requestBody.content['multipart/form-data'].schema.properties.file",
+                "type": "update",
+                "value": {
+                    "type": "string",
+                    "description": "File to upload.",
+                    "format": "binary"
+                }
+            },
+            {
+                "key": "paths['/blobelements/d/{did}/w/{wid}/e/{eid}'].post.requestBody.content['multipart/form-data'].schema.properties.file",
+                "type": "update",
+                "value": {
+                    "type": "string",
+                    "description": "File to upload.",
+                    "format": "binary"
+                }
+            },
+            {
+                "key": "paths['/comments/{cid}/attachment'].post.requestBody.content['multipart/form-data'].schema.properties.file",
+                "type": "update",
+                "value": {
+                    "type": "string",
+                    "description": "File to upload.",
+                    "format": "binary"
+                }
+            },
+            {
+                "key": "paths['/translations/d/{did}/w/{wid}'].post.requestBody.content['multipart/form-data'].schema.properties.file",
+                "type": "update",
+                "value": {
+                    "type": "string",
+                    "description": "File to upload.",
+                    "format": "binary"
+                }
+            },
+            {
+                "key": "components.schemas['BTMParameterDerived-864'].allOf[1].properties.configuration",
+                "type": "update",
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/components/schemas/BTMParameter-1"
+                    }
+                }
+            }
+        ]
+    }
+}

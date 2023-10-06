@@ -1,0 +1,34 @@
+{
+  "name": "onshape-typescript-fetch",
+  "version": "1.12.0",
+  "description": "Onshape Typescript-fetch library",
+  "main": "index.ts",
+  "scripts": {
+    "build": "npm install && npm run genmodspec && npm run compilespec",
+    "genmodspec": "node gen_modified_openapi.js",
+    "compilespec": "npx @openapitools/openapi-generator-cli generate -i modified_openapi.json -o ../onshape-typescript-fetch -t custom_template/ --skip-validate-spec --additional-properties=npmName=onshape-typescript-fetch,gitRepository=fred,legacyDiscriminatorBehavior=false -g typescript-fetch --git-repo-id onscript-typescript-fetch --git-user-id toebes",
+    "patchspec": "node fix_tojson.js --dir models",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "npx typedoc --out docs index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toebes/onshape-typescript-fetch-generator.git"
+  },
+  "keywords": [
+    "onshape",
+    "typescript"
+  ],
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/toebes/onshape-typescript-fetch-generator/issues"
+  },
+  "homepage": "https://github.com/toebes/onshape-typescript-fetch-generator#readme",
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "json": "^11.0.0",
+    "typedoc": "^0.23.26",
+    "yargs": "^17.7.2"
+  }
+}
